@@ -80,16 +80,23 @@ function togglePlaySpeed() {
           var octave = k.slice(-1)
           var note = k.slice(0, -1)
           var z = zt[k] 
-          //if (octave == 0) {
+          if (z > .5) {
+            z = 1
+          } else if (z > .2) {
+            z = .5
+          }
+          //if (z >0) {
           //  z = Math.min(1, z*1000)
           //}
           var pianoKey = getPianoKey(note, octave)
           //console.log(pianoKey.attr('class'))
           var color
           if (pianoKey.attr("class").indexOf('white') > -1) {
-            color =  rgba(0, 0, 1, z > .2 ? 1 : 0) // for white keys
+            color =  rgba(0, 0, 1, z)
+            //color =  rgba(0, 0, 1, z > .2 ? 1 : 0) // for white keys
           } else {
-            color =  rgb(0, 0, z > .2 ? 1 : 0) // for black keys
+            color =  rgb(0, 0, z)
+            //color =  rgb(0, 0, z > .2 ? 1 : 0) // for black keys
           }
           pianoKey.attr("style","fill: " + color)
         }

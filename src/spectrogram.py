@@ -19,7 +19,7 @@ if x.ndim > 1: x = x[:,1]
 
 
 ### Spectrogram (High resolution)
-f, t, Zxx = my_spectrogram(x, fs, nperseg=2**15)
+f, t, Zxx = my_spectrogram(x, fs, nperseg=2**13)
 #f.size
 
 ### Dump JSON ###

@@ -73,6 +73,6 @@ def my_spectrogram(x, fs, nperseg=2**14, window=None):
     if window is None:
         window = signal.get_window('blackman', Nx=nperseg)
 
-    f, t, Zxx = signal.spectrogram(x, fs, nperseg=nperseg, window=window)
+    f, t, Zxx = signal.spectrogram(x, fs, nperseg=nperseg, window=window, noverlap=nperseg * .5)
     return bin_spec(f, t, Zxx)
 

@@ -13,7 +13,6 @@ filepath=$1
 filename=$(basename "$filepath")
 ext="${filename##*.}"
 fmt=""
-echo $ext
 
 if [ $ext = "wav" ]
 then
