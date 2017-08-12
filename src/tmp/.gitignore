@@ -3,4 +3,5 @@ js/
 *.wav
 *.mp3
 *.html
+*.json
 tmp
