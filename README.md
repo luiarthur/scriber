@@ -1,5 +1,5 @@
 # scriber
-My Hacky Transctriber
+My hacky audio transcribing aid.
 
 # Install
 

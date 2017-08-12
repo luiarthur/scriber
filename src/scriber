@@ -1,0 +1,38 @@
+#!/bin/bash
+
+numArgs=$#
+
+if [ $numArgs -ne 1 ]
+then
+  echo "Usage: "
+  echo "      ./scriber myAudioFile.wav"
+  exit 1
+fi
+
+filepath=$1
+filename=$(basename "$filepath")
+ext="${filename##*.}"
+fmt=""
+echo $ext
+
+if [ $ext = "wav" ]
+then
+  fmt="wav"
+else
+  echo "Currently, python only takes 'wav' files, not mp3's. Please convert your "
+  echo "your audio to 'wav' format first."
+  exit 1
+  fmt="mpeg"
+fi
+
+python spectrogram.py $filepath
+sed "s@{{filepath}}@$filename@g" template/index.html > tmp/tmp
+sed "s@{{fmt}}@$fmt@g" tmp/tmp > tmp/index.html
+rm -f tmp/tmp
+
+cp $filepath tmp
+cp -r css tmp
+cp -r js tmp
+
+cd tmp 
+python -m SimpleHTTPServer

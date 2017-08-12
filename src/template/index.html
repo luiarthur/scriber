@@ -1,0 +1,103 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+  <link rel="stylesheet" href="/css/piano.css">
+  <script src="/js/d3.v4.min.js"></script>
+  <script src="/js/piano.js"></script>
+  <script src="/js/util.js"></script>
+  <script type="text/javascript" src="/out/spec.json"></script>
+</head>
+
+<body> 
+<button onclick="togglePlaySpeed()" type="button">Toggle Speed</button>
+<br> 
+
+
+<audio id="myAudio" width="320" height="176"controls>
+  <!--source src="/bokeh/wav/embraceableYou_mono.wav" type="audio/mpeg"-->
+  <!--source src="/{{filepath}}" type="audio/wav"-->
+  <source src="/{{filepath}}" type="audio/{{fmt}}">
+</audio>
+
+
+<script>
+var aid = document.getElementById("myAudio");
+function getPlaySpeed() { return aid.playbackRate } 
+function togglePlaySpeed() { 
+  if (getPlaySpeed() < 1) {
+    aid.playbackRate = 1
+  } else {
+    aid.playbackRate = 0.5 
+  }
+}
+//function getTrackTime() { return aid.currentTime + 's' } 
+</script> 
+
+<p>Playing Gerald Clayton: Embraceable You. </p>
+
+<!-- NEED TO READ DATA AND HIGHLIGHT KEYBOARD or MAKE CHORD ON SMALL STAVE -->
+
+<svg id="piano" width="700" height="50"></svg>
+</body> 
+
+<script>
+  makePiano("#piano")
+  // test:
+  //var as4 = d3.select("#piano .key-As.key-octave4")
+  //console.log(as4.attr("class"))
+  //test
+  //setInterval(function(){ console.log("Hello"); }, 10);
+
+  // load data:
+  var ZJ
+  var timeKeys = []
+  d3.json('/spec.json', function(data) {
+      ZJ = data[0]
+      for (k in ZJ) {timeKeys.push(k)}
+  });
+
+  function getPianoKey(note, octave) {
+    return d3.select("#piano .key-" + note + ".key-octave" + octave)
+  }
+
+  function rgb(r, g, b){
+    return "rgb(" + round(r*255,0) + "," + round(g*255,0)+ "," + round(b*255,0)+")";
+  }
+
+  function rgba(r, g, b, a){
+    return "rgba(" + round(r*255,0) + "," + round(g*255,0)+ "," + round(b*255,0)+ "," + a + ")";
+  }
+
+  function colorNotes() {
+    if (!aid.paused) { 
+      var currTime = round(aid.currentTime, 2)
+      var zt = ZJ[currTime.toString()]
+      if (zt !== undefined) {
+        //console.log(currTime)
+        //console.log(zt)
+        // plot on keyboard
+        for (k in zt) {
+          var octave = k.slice(-1)
+          var note = k.slice(0, -1)
+          var z = zt[k] 
+          //if (octave == 0) {
+          //  z = Math.min(1, z*1000)
+          //}
+          var pianoKey = getPianoKey(note, octave)
+          //console.log(pianoKey.attr('class'))
+          var color
+          if (pianoKey.attr("class").indexOf('white') > -1) {
+            color =  rgba(0, 0, 1, z > .2 ? 1 : 0) // for white keys
+          } else {
+            color =  rgb(0, 0, z > .2 ? 1 : 0) // for black keys
+          }
+          pianoKey.attr("style","fill: " + color)
+        }
+      }
+    }
+  }
+  setInterval(colorNotes , 10);
+
+</script>
+
+</html>
