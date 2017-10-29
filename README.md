@@ -1,5 +1,5 @@
 # scriber
-My hacky audio transcribing aid.
+My hacky audio transcribing aid. (Currently no support for Windows.)
 
 # Requirements
 
@@ -12,6 +12,9 @@ For `youtube_mp3.py`
       - `brew install libav`
 
 # Install
+
+Clone (or download and unzip) this repository somewhere (a permanent location). 
+Then add the following to your `~/.bashrc` (on Ubuntu) or `~/.profile` (on OSX).
 
 ```bash
 export SCRIBER_HOME="path/to/scriber/src"
