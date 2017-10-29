@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo $SCRIBER_HOME
+#echo $SCRIBER_HOME
 CWD="$PWD"
 
 if [ -d "$SCRIBER_HOME" ]
 then
-  echo "HI"
+  #echo "HI"
   cd $SCRIBER_HOME
 else
   echo "SCRIBER_HOME environment variable not set."
@@ -25,7 +25,7 @@ fi
 
 filepath=$1
 
-echo $filepath
+#echo $filepath
 if [[ "$filepath" == *"youtube"* ]] 
 then
   echo "Contains youtube"
@@ -34,7 +34,13 @@ then
   filepath="$SCRIBER_HOME/tmp/target.wav"
   mv *.wav $filepath
 else
-  filepath="$CWD/$filepath"
+  if [ -e "$filepath" ]
+  then
+    echo "good"
+  else
+    echo "Must use absolute file path."
+    exit 1
+  fi
 fi
 
 filename=$(basename "$filepath")
