@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo $SCRIBER_HOME
+CWD="$PWD"
 
 if [ -d "$SCRIBER_HOME" ]
 then
@@ -32,6 +33,8 @@ then
   echo "done"
   filepath="$SCRIBER_HOME/tmp/target.wav"
   mv *.wav $filepath
+else
+  filepath="$CWD/$filepath"
 fi
 
 filename=$(basename "$filepath")
