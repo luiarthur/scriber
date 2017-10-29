@@ -32,7 +32,7 @@ scriber absolute/path/to/my.mp3
 Or to transcribe a YouTube audio
 
 ```bash
-scriber youtube.com/xyz
+scriber link/to/youtube/audio
 ```
 
 
