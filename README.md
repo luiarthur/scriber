@@ -1,7 +1,25 @@
 # scriber
 My hacky audio transcribing aid.
 
+# Requirements
+
+For `youtube_mp3.py`
+
+- `ffmpeg` or `avconv`. 
+- install on ubuntu by `sudo apt-get install ffmpeg libav-tools`
+
+# Usage
+
+Go to `src`, then
+
+`./scriber <path-to-mp3>`
+
 # Install
+
+```bash
+export SCRIBER_HOME="path/to/scriber/src"
+export PATH=$SCRIBER_HOME:$PATH
+```
 
 # Install Python Dependencies
 

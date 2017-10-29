@@ -1,15 +1,39 @@
 #!/bin/bash
 
+echo $SCRIBER_HOME
+
+if [ -d "$SCRIBER_HOME" ]
+then
+  echo "HI"
+  cd $SCRIBER_HOME
+else
+  echo "SCRIBER_HOME environment variable not set."
+  exit 1
+fi
+
 numArgs=$#
 
 if [ $numArgs -ne 1 ]
 then
   echo "Usage: "
   echo "      ./scriber myAudioFile.wav"
+  echo "Or: "
+  echo "      ./scriber youtube-url"
   exit 1
 fi
 
 filepath=$1
+
+echo $filepath
+if [[ "$filepath" == *"youtube"* ]] 
+then
+  echo "Contains youtube"
+  ./youtube_mp3.py $filepath
+  echo "done"
+  filepath="$SCRIBER_HOME/tmp/target.wav"
+  mv *.wav $filepath
+fi
+
 filename=$(basename "$filepath")
 ext="${filename##*.}"
 fmt=""
