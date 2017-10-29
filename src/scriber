@@ -2,6 +2,7 @@
 
 #echo $SCRIBER_HOME
 CWD="$PWD"
+PORT="1719"
 
 if [ -d "$SCRIBER_HOME" ]
 then
@@ -67,4 +68,4 @@ cp -r css tmp
 cp -r js tmp
 
 cd tmp 
-python -m SimpleHTTPServer
+python -m SimpleHTTPServer $PORT

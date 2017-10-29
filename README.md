@@ -23,7 +23,7 @@ export PATH=$SCRIBER_HOME:$PATH
 
 # Usage
 
-Then, in a terminal
+In a terminal
 
 ```bash
 scriber absolute/path/to/my.mp3
@@ -34,6 +34,15 @@ Or to transcribe a YouTube audio
 ```bash
 scriber link/to/youtube/audio
 ```
+
+Then, open a browser and go to
+
+```bash
+localhost:2499
+```
+
+If you need to change the port-number, just change `PORT` to whatever
+number you want in the `src/scriber` file. 
 
 
 # Install Python Dependencies
