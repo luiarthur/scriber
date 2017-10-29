@@ -5,14 +5,11 @@ My hacky audio transcribing aid.
 
 For `youtube_mp3.py`
 
-- `ffmpeg` or `avconv`. 
-- install on ubuntu by `sudo apt-get install ffmpeg libav-tools`
-
-# Usage
-
-Go to `src`, then
-
-`./scriber <path-to-mp3>`
+- For Linux (Ubuntu)
+      - `ffmpeg` or `avconv`. 
+      - install on Ubuntu by `sudo apt-get install ffmpeg libav-tools`
+- For OSX
+      - `brew install libav`
 
 # Install
 
@@ -21,8 +18,23 @@ export SCRIBER_HOME="path/to/scriber/src"
 export PATH=$SCRIBER_HOME:$PATH
 ```
 
-# Install Python Dependencies
+# Usage
 
+Then, in a terminal
+
+```bash
+scriber absolute/path/to/my.mp3
+```
+
+Or to transcribe a YouTube audio
+
+```bash
+scriber youtube.com/xyz
+```
+
+
+# Install Python Dependencies
+???
 
 # Quick Start
 
@@ -30,8 +42,8 @@ export PATH=$SCRIBER_HOME:$PATH
 My sandbox is [here][1].
 
 # To Do
-- [ ] test on OSX. (especially `sed` in the executable `scribe`)
-- [ ] allow installation. (export statement in bashrc)
+- [ ] test on OSX. (especially `sed` in the executable `scriber`)
+- [ ] allow installation. (export statement in `~/.bashrc.`)
 - [ ] do the parsing in python, instead of bash (for portability)
 
 [1]: https://github.com/luiarthur/signal_processing/tree/master/sandbox/python
