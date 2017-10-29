@@ -36,7 +36,7 @@ then
 else
   if [ -e "$filepath" ]
   then
-    echo "good"
+    echo "Reading $filepath ..."
   else
     echo "Must use absolute file path."
     exit 1
