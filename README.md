@@ -19,7 +19,7 @@ For `youtube_mp3.py`
       - install on Ubuntu by 
 
 ```bash
-sudo apt-get install ffmpeg libav-tools
+sudo apt-get install libav-tools
 ```
 
 - For OSX
