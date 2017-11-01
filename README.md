@@ -17,9 +17,11 @@ For `youtube_mp3.py`
 - For Linux (Ubuntu)
       - `ffmpeg` or `avconv`. 
       - install on Ubuntu by 
-        ```bash
-        sudo apt-get install ffmpeg libav-tools
-        ```
+
+```bash
+sudo apt-get install ffmpeg libav-tools
+```
+
 - For OSX
       - `brew install libav`
 
