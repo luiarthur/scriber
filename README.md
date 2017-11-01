@@ -1,7 +1,16 @@
 # scriber
 My hacky audio transcribing aid. (Currently no support for Windows.)
 
-# Requirements
+# Required Python Libraries
+
+```bash
+pip install youtube_dl
+pip install numpy
+pip install scipy
+pip install pandas
+```
+
+# System Requirements
 
 For `youtube_mp3.py`
 
@@ -10,6 +19,7 @@ For `youtube_mp3.py`
       - install on Ubuntu by `sudo apt-get install ffmpeg libav-tools`
 - For OSX
       - `brew install libav`
+
 
 # Install
 
