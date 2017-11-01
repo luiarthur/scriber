@@ -23,7 +23,10 @@ sudo apt-get install ffmpeg libav-tools
 ```
 
 - For OSX
-      - `brew install libav`
+
+```bash
+brew install libav
+```
 
 
 # Install
