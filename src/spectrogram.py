@@ -8,15 +8,18 @@ from notes import pitch, piano_freq, freq_dict, my_spectrogram
 import pandas as pd
 
 if len(sys.argv) < 2:
-    print "Usage: python spectrogram.py <myAwesomeTrack.wav>"
+    print("Usage: python spectrogram.py <myAwesomeTrack.wav>")
     sys.exit(0)
 
-FILE = sys.argv[1]
+FNAME = sys.argv[1]
 
 ### Read a wavfile
-(fs, x) = wavfile.read(FILE)
-if x.ndim > 1: x = x[:,1]
+(fs, x) = wavfile.read(FNAME)
+if x.ndim > 1:
+    x = x[:,1]
 
+# TEST
+#f, t, S = signal.spectrogram(x, fs, nperseg=2**14, noverlap=2**14*.5, window=signal.get_window('blackman', Nx=2**14))
 
 ### Spectrogram (High resolution)
 f, t, Zxx = my_spectrogram(x, fs, nperseg=2**14, noverlap=2**14*.5)

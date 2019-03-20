@@ -58,7 +58,7 @@ else
   fmt="mpeg"
 fi
 
-python spectrogram.py $filepath
+python3 spectrogram.py $filepath
 sed "s@{{filepath}}@$filename@g" template/index.html > tmp/tmp
 sed "s@{{fmt}}@$fmt@g" tmp/tmp > tmp/index.html
 rm -f tmp/tmp
@@ -68,4 +68,4 @@ cp -r css tmp
 cp -r js tmp
 
 cd tmp 
-python -m SimpleHTTPServer $PORT
+python3 -m http.server $PORT

@@ -40,33 +40,23 @@ for i in range(88):
 #p_set = pitch(np.arange(28,4188))
 
 def closest_piano_freq(f):
-    return np.array(map(lambda x: freq_dict[x], pitch(f)))
+    return np.array(list(map(lambda x: freq_dict[x], pitch(f))))
+    # return np.array([freqs_dict[key] for key in pitch(f)])
 
 def bin_spec(f, t, S, min_freq=27, max_freq=4200, S_max=None):
-    #idx = np.argwhere(min_freq <= f and f <= max_freq)
     idx = np.argwhere((min_freq <= f) * (f <= max_freq)).T[0]
     f = f[idx]
-    Z = S[idx,:]
+    Z = S[idx, :]
 
     # Get pitches corresponding to freqs
     index = pd.Index(closest_piano_freq(f), name='pf')
     df = pd.DataFrame(Z, index=index)
     Z_new = df.groupby('pf').max()
-    #df.groupby(['pitch']).mean().as_matrix()
-    #df.groupby(['pitch']).max().as_matrix()
     f_new = Z_new.index.values
-    Z_new = Z_new.as_matrix()
-    #Z_new = Z
-    #f_new = f
-
-    #mx = Z_new.max() if S_max is None else S_max
-    #return f_new, t, np.exp( np.log(Z_new) - np.log(mx) )
-
-    # version2:
+    Z_new = Z_new.values
     mm = np.kron(np.ones(Z_new.shape[0]), np.asmatrix(np.max(Z,0)).T)
-    #print mm
-    #print np.max(Z,0)
-    return f_new, t, np.asarray(np.exp( np.log(Z_new) - np.log(mm.T) ))
+
+    return f_new, t, np.asarray(np.exp( np.log(Z_new + 1e-10) - np.log(mm.T + 1e-10) ))
 
 
 def my_spectrogram(x, fs, nperseg=2**14, window=None, noverlap=8):
