@@ -6,6 +6,7 @@ from scipy.io import wavfile
 from scipy import signal
 from notes import pitch, piano_freq, freq_dict, my_spectrogram
 import pandas as pd
+import matplotlib.pyplot as plt
 
 if len(sys.argv) < 2:
     print("Usage: python spectrogram.py <myAwesomeTrack.wav>")
@@ -22,8 +23,18 @@ if x.ndim > 1:
 #f, t, S = signal.spectrogram(x, fs, nperseg=2**14, noverlap=2**14*.5, window=signal.get_window('blackman', Nx=2**14))
 
 ### Spectrogram (High resolution)
-f, t, Zxx = my_spectrogram(x, fs, nperseg=2**14, noverlap=2**14*.5)
-#f.size
+# nperseg = 2 ** 14
+nperseg = 2 ** 13
+f, t, Zxx = my_spectrogram(x, fs, nperseg=nperseg, noverlap=nperseg / 2)
+
+if False:
+    idx = np.argwhere(f <= 4200).squeeze()
+    plt.pcolormesh(t, f[idx], np.abs(Zxx[idx, :]))
+    plt.title('STFT Magnitude')
+    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time [sec]')
+    plt.colorbar()
+    plt.show()
 
 ### Dump JSON ###
 index = [p.replace('#', 's') for p in pitch(f)]
