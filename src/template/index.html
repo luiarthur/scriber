@@ -43,12 +43,6 @@ function togglePlaySpeed() {
 
 <script>
   makePiano("#piano")
-  // test:
-  //var as4 = d3.select("#piano .key-As.key-octave4")
-  //console.log(as4.attr("class"))
-  //test
-  //setInterval(function(){ console.log("Hello"); }, 10);
-
   // load data:
   var ZJ
   var timeKeys = []
@@ -74,30 +68,22 @@ function togglePlaySpeed() {
       var currTime = round(aid.currentTime, 2)
       var zt = ZJ[currTime.toString()]
       if (zt !== undefined) {
-        //console.log(currTime)
-        //console.log(zt)
-        // plot on keyboard
         for (k in zt) {
           var octave = k.slice(-1)
           var note = k.slice(0, -1)
           var z = zt[k] 
-          if (z > .5) {
+          if (z >= .5) {
             z = 1
-          } else if (z > .2) {
-            z = .7
+          } else if (z >= .2) {
+            z = .2
           }
-          //if (z >0) {
-          //  z = Math.min(1, z*1000)
-          //}
           var pianoKey = getPianoKey(note, octave)
           //console.log(pianoKey.attr('class'))
           var color
           if (pianoKey.attr("class").indexOf('white') > -1) {
-            color =  rgba(0, 0, 1, z)
-            //color =  rgba(0, 0, 1, z > .2 ? 1 : 0) // for white keys
+            color =  rgba(1, 0, 0, z)
           } else {
-            color =  rgb(0, 0, z)
-            //color =  rgb(0, 0, z > .2 ? 1 : 0) // for black keys
+            color =  rgb(z, 0, 0)
           }
           pianoKey.attr("style","fill: " + color)
         }

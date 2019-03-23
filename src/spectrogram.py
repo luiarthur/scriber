@@ -24,8 +24,9 @@ if x.ndim > 1:
 
 ### Spectrogram (High resolution)
 # nperseg = 2 ** 14
+# f, t, Zxx = my_spectrogram(x, fs, nperseg=nperseg, noverlap=nperseg / 2)
 nperseg = 2 ** 13
-f, t, Zxx = my_spectrogram(x, fs, nperseg=nperseg, noverlap=nperseg / 2)
+f, t, Zxx = my_spectrogram(x, fs, nperseg=nperseg, noverlap=nperseg / 8)
 
 if False:
     idx = np.argwhere(f <= 4200).squeeze()

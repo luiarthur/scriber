@@ -54,15 +54,29 @@ def bin_spec(f, t, S, min_freq=27, max_freq=4200, S_max=None):
     Z_new = df.groupby('pf').max()
     f_new = Z_new.index.values
     Z_new = Z_new.values
-    mm = np.kron(np.ones(Z_new.shape[0]), np.asmatrix(np.max(Z,0)).T)
 
+    # VERSION I
+    mm = np.kron(np.ones(Z_new.shape[0]), np.asmatrix(np.max(Z,0)).T)
     return f_new, t, np.asarray(np.exp( np.log(Z_new + 1e-10) - np.log(mm.T + 1e-10) ))
+
+    # VERSION II
+    # return f_new, t, np.asarray(Z_new)
 
 
 def my_spectrogram(x, fs, nperseg=2**14, window=None, noverlap=8):
     if window is None:
         window = signal.get_window('blackman', Nx=nperseg)
 
+    # VERSION I
     f, t, Zxx = signal.spectrogram(x, fs, nperseg=nperseg, window=window, noverlap=noverlap)
+    
+    # VERSION II
+    # f, t, Zxx = signal.stft(x, fs, nperseg=nperseg)
+    # Zxx = np.abs(Zxx)
+    # thresh = 400
+    # Zxx[Zxx < thresh] = .2
+    # Zxx[Zxx < 100] = 0.
+    # Zxx[Zxx >= thresh] = 1.
+
     return bin_spec(f, t, Zxx)
 
